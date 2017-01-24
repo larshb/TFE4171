@@ -1,0 +1,67 @@
+***********************************************************
+Simulation Log - Q U E S T I O N S
+***********************************************************
+/* +define+no_implication
+
+run -all
+KERNEL:         10  clk=1 req=0 gnt=0
+KERNEL:         10               test_implication FAIL
+KERNEL:         30  clk=1 req=1 gnt=0
+KERNEL:         50  clk=1 req=0 gnt=0
+KERNEL:         50               test_implication FAIL
+KERNEL:         70  clk=1 req=0 gnt=1
+KERNEL:         70               test_implication FAIL
+KERNEL:         70               test_implication PASS
+
+		Q: WHY IS THERE A FAIL -AND- A PASS AT TIME (70) ??
+		A: The first (FAIL) is because there is a new assertion started at TIME(70) when req = 0, then the previous assertion started at TIME(30) is tested and found to hold because gnt = 1 two ticks after req =1
+
+KERNEL:         90  clk=1 req=1 gnt=0
+KERNEL:        110  clk=1 req=0 gnt=0
+KERNEL:        110               test_implication FAIL
+KERNEL:        130  clk=1 req=0 gnt=0
+KERNEL:        130               test_implication FAIL
+KERNEL:        130               test_implication FAIL
+
+		Q: WHY ARE THERE 2 FAILs AT TIME (130) ??
+		A: Because the first part of the assertion started at TIME(90) was true (req=1), and the second part was false when it was tested two ticks later (at TIME(130))
+*/
+
+/* +define+implication
+
+run -all
+KERNEL:         10  clk=1 req=0 gnt=0
+KERNEL:         10               test_implication PASS
+KERNEL:         30  clk=1 req=1 gnt=0
+KERNEL:         50  clk=1 req=0 gnt=0
+KERNEL:         50               test_implication PASS
+KERNEL:         70  clk=1 req=0 gnt=1
+KERNEL:         70               test_implication PASS
+KERNEL:         70               test_implication PASS
+
+		WHY ARE THERE 2 PASSes AT TIME 70 ??
+
+KERNEL:         90  clk=1 req=1 gnt=0
+KERNEL:        110  clk=1 req=0 gnt=0
+KERNEL:        110               test_implication PASS
+KERNEL:        130  clk=1 req=0 gnt=0
+KERNEL:        130               test_implication FAIL
+KERNEL:        130               test_implication PASS
+
+		WHY IS THERE A PASS -and- a FAIL AT TIME 130 ??
+*/
+
+/* +define+implication_novac
+
+run -all
+KERNEL:         10  clk=1 req=0 gnt=0
+KERNEL:         30  clk=1 req=1 gnt=0
+KERNEL:         50  clk=1 req=0 gnt=0
+KERNEL:         70  clk=1 req=0 gnt=1
+KERNEL:         70               test_implication PASS
+KERNEL:         90  clk=1 req=1 gnt=0
+KERNEL:        110  clk=1 req=0 gnt=0
+KERNEL:        130  clk=1 req=0 gnt=0
+KERNEL:        130               test_implication FAIL
+
+*/

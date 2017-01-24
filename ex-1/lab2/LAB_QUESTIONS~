@@ -1,0 +1,85 @@
+***********************************************************
+Simulation Log - Q U E S  T I O N S
+***********************************************************
+
+/* +define+overlap
+
+run -all
+KERNEL:         10  clk=1 cstart=0 req=0 gnt=0
+KERNEL:         30  clk=1 cstart=1 req=0 gnt=0
+KERNEL:         30  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 30?
+		A: The property fails at 30 because req is deasserted, while sr1 says it should be asserted
+
+KERNEL:         50  clk=1 cstart=1 req=1 gnt=0
+KERNEL:         70  clk=1 cstart=0 req=0 gnt=0
+KERNEL:         90  clk=1 cstart=0 req=0 gnt=1
+KERNEL:         90  		 test_overlap_nonoverlap PASS
+
+		Q: WHY DOES THE PROPERTY PASS at 90?
+		A: It passes at 90 because the it behaves as described in sr1 - req=1 immediately when cstart=1, and then gnt=1 two cycles later.
+
+KERNEL:        110  clk=1 cstart=1 req=1 gnt=0
+KERNEL:        130  clk=1 cstart=1 req=1 gnt=0
+KERNEL:        150  clk=1 cstart=1 req=1 gnt=1
+KERNEL:        150  		 test_overlap_nonoverlap PASS
+
+		Q: WHY DOES THE PROPERTY PASS at 150?
+		A: Same as above (it doesn't care that req still is 1)
+
+KERNEL:        170  clk=1 cstart=0 req=1 gnt=0
+KERNEL:        170  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 170?
+		A: It fails because a new check is triggered at 130 and gnt is no longer 1
+
+KERNEL:        190  clk=1 cstart=0 req=0 gnt=0
+KERNEL:        190  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 190?
+		A: Same as above
+
+KERNEL:        210  clk=1 cstart=0 req=0 gnt=1
+
+*/
+
+/* +define+nonoverlap
+
+run -all
+KERNEL:         10  clk=1 cstart=0 req=0 gnt=0
+KERNEL:         30  clk=1 cstart=1 req=0 gnt=0
+KERNEL:         50  clk=1 cstart=1 req=1 gnt=0
+KERNEL:         70  clk=1 cstart=0 req=0 gnt=0
+KERNEL:         70  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 70?
+		A: Because cstart=1 triggers a check at time 50, req=0 on the next clock and therefore the sequence is violated
+
+KERNEL:         90  clk=1 cstart=0 req=0 gnt=1
+KERNEL:         90  		 test_overlap_nonoverlap PASS
+
+		Q: WHY DOES THE PROPERTY PASS at 90?
+		A: This is the assertion that is triggered at time 30, then req=1 on the next clock and two clocks later gnt=1 --> pass
+
+KERNEL:        110  clk=1 cstart=1 req=1 gnt=0
+KERNEL:        130  clk=1 cstart=1 req=1 gnt=0
+KERNEL:        150  clk=1 cstart=1 req=1 gnt=1
+KERNEL:        170  clk=1 cstart=0 req=1 gnt=0
+KERNEL:        170  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 170?
+		A: cstart=1 at time 110 starts the check, req=1 at time 130 checks out, but gnt=0 two periods later (time 170)
+
+KERNEL:        190  clk=1 cstart=0 req=0 gnt=0
+KERNEL:        190  		 test_overlap_nonoverlap FAIL
+
+		Q: WHY DOES THE PROPERTY FAIL at 190?
+		A: Same as the above
+
+KERNEL:        210  clk=1 cstart=0 req=0 gnt=1
+KERNEL:        210  		 test_overlap_nonoverlap PASS
+
+		Q: WHY DOES THE PROPERTY PASS at 210?
+		A: cstart at time 150 triggers the check, req=1 at 170 passes, then two periods later (at 210) gnt=1 so it passes.
+*/
