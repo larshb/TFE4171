@@ -1,0 +1,8 @@
+# vsim -assertdebug -coverage -c test_bus_protocol -l test_bus_protocol_check3.log -do " run -all; quit" 
+# Start time: 14:19:25 on Jan 26,2017
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: test_bus_protocol.sv(9): Module 'bus_protocol_property' is not defined.
+# Optimization failed
+# Error loading design
+# End time: 14:19:26 on Jan 26,2017, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
