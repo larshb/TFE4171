@@ -22,7 +22,7 @@ module counter_property (
 //------------------------------------
 `ifdef check1
 property counter_reset;
-  @(posedge clk) data_in |=> data_out; //DUMMY - REMOVE this line and code correct assertion 
+  @(posedge clk) !rst_ |-> data_out == 8'b0; 
 endproperty
 
 counter_reset_check: assert property(counter_reset) 
@@ -40,7 +40,7 @@ counter_reset_check: assert property(counter_reset)
 //------------------------------------
 `ifdef check2
 property counter_hold;
-  @(posedge clk) data_in |=> data_out; //DUMMY - REMOVE  this line and code correct assertion
+  @(posedge clk) disable iff (!rst_) ld_cnt_ && !count_enb |=> $stable(data_out);
 endproperty
 
 counter_hold_check: assert property(counter_hold) 
@@ -58,7 +58,7 @@ counter_hold_check: assert property(counter_hold)
 
 `ifdef check3
 property counter_count;
-  @(posedge clk) data_in |=> data_out; //DUMMY - REMOVE  this line and code correct assertion
+  @(posedge clk) disable iff (!rst_) ld_cnt_ && count_enb |=> (updn_cnt && (data_out == $past(data_out)+1)) or  (!updn_cnt && (data_out == $past(data_out-1)));
 endproperty
 
 counter_count_check: assert property(counter_count) 
