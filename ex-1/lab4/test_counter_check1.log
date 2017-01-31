@@ -1,5 +1,5 @@
 # vsim -assertdebug -coverage -c test_counter -l test_counter_check1.log -do " run -all; quit" 
-# Start time: 12:51:55 on Jan 26,2017
+# Start time: 15:51:18 on Jan 31,2017
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim-64
 # //  Version 10.5c linux_x86_64 Jul 20 2016
@@ -22,7 +22,7 @@
 #  run -all
 #          5  rst_=1 clk=1 count_enb=0 ld_cnt_=1 updn_cnt=1 DIN=x DOUT=x
 #         15  rst_=0 clk=1 count_enb=0 ld_cnt_=1 updn_cnt=1 DIN=x DOUT=x
-#         15  		COUNTER RESET CHECK FAIL:: rst_=0 data_out=x 
+#         20  		COUNTER RESET CHECK FAIL:: rst_=0 data_out=x 
 # 
 #         25  rst_=0 clk=1 count_enb=0 ld_cnt_=1 updn_cnt=1 DIN=x DOUT=x
 #         25  		COUNTER RESET CHECK FAIL:: rst_=0 data_out=x 
@@ -61,5 +61,5 @@
 #          Process time 0.02 seconds
 #          $finish    : test_counter.sv(29)
 #    Time: 325 ns  Iteration: 1  Instance: /test_counter
-# End time: 12:52:38 on Jan 26,2017, Elapsed time: 0:00:43
+# End time: 15:52:03 on Jan 31,2017, Elapsed time: 0:00:45
 # Errors: 0, Warnings: 2

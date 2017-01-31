@@ -22,7 +22,7 @@ module counter_property (
 //------------------------------------
 `ifdef check1
 property counter_reset;
-  @(posedge clk) !rst_ |-> data_out == 8'b0; 
+  @(clk) disable iff (rst_) !rst_ |=> data_out == 8'b0; 
 endproperty
 
 counter_reset_check: assert property(counter_reset) 
