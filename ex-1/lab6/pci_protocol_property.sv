@@ -11,8 +11,7 @@ module pci_protocol_property (input logic clk, reset_, TRDY_, DEVSEL_, FRAME_, I
           --------------------------------------------------*/
 `ifdef check1
         property checkPCI_AD_CBE;
-          @(posedge clk) disable iff (!reset_) 
-		FRAME_ |-> 1'b1; //DUMMY - REMOVE this line and code correct assertion
+          @(posedge clk) $fell(FRAME_) |-> !($isunknown(AD) || $isunknown(C_BE_));
         endproperty
         assert property (checkPCI_AD_CBE) else $display($stime,,,"CHECK1:checkPCI_AD_CBE FAIL\n");
 `endif
@@ -22,8 +21,7 @@ module pci_protocol_property (input logic clk, reset_, TRDY_, DEVSEL_, FRAME_, I
           --------------------------------------------------*/
 `ifdef check2
         property checkPCI_DataPhase;
-          @(posedge clk) disable iff (!reset_) 
-		FRAME_ |-> 1'b1; //DUMMY - REMOVE this line and code correct assertion
+          @(posedge clk) !IRDY_ && !TRDY_ |-> !($isunknown(AD) || $isunknown(C_BE_));
         endproperty
         assert property (checkPCI_DataPhase) else $display($stime,,,"CHECK2:checkPCI_DataPhase FAIL\n");
 `endif
@@ -35,7 +33,7 @@ module pci_protocol_property (input logic clk, reset_, TRDY_, DEVSEL_, FRAME_, I
 `ifdef check3
         property checkPCI_Frame_Irdy; 
           @(posedge clk) disable iff (!reset_) 
-		FRAME_ |-> 1'b1; //DUMMY - REMOVE this line and code correct assertion
+		$rose(FRAME_) |-> !IRDY_;
         endproperty
         assert property (checkPCI_Frame_Irdy) else $display($stime,,,"CHECK3:checkPCI_frmIrdy FAIL\n");
 `endif
@@ -46,7 +44,7 @@ module pci_protocol_property (input logic clk, reset_, TRDY_, DEVSEL_, FRAME_, I
 `ifdef check4
         property checkPCI_trdyDevsel; 
           @(posedge clk) disable iff (!reset_) 
-		FRAME_ |-> 1'b1; //DUMMY - REMOVE this line and code correct assertion
+		!TRDY_ |-> !DEVSEL_;
         endproperty
         assert property (checkPCI_trdyDevsel) else $display($stime,,,"CHECK4:checkPCI_trdyDevsel FAIL\n");
 `endif
@@ -58,7 +56,7 @@ module pci_protocol_property (input logic clk, reset_, TRDY_, DEVSEL_, FRAME_, I
 `ifdef check5
         property checkPCI_CBE_during_trx; 
           @(posedge clk) disable iff (!reset_) 
-		FRAME_ |-> 1'b1; //DUMMY - REMOVE this line and code correct assertion
+		$fell(FRAME_) |-> !$isunknown(C_BE_) until_with FRAME_;
         endproperty
         assert property (checkPCI_CBE_during_trx) else $display($stime,,,"CHECK5:checkPCI_CBE_during_trx FAIL\n");
 `endif
