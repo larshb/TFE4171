@@ -24,9 +24,8 @@ module bus_protocol_property (input bit clk, dValid, dAck, reset,
           --------------------------------------------------*/
 `ifdef check2
         property checkdataValid;
-         @(posedge clk) disable iff (reset)
-	  @(posedge clk) $rose(dValid) |-> (data !== 8'bx)[*1:5] ##0 dAck and $stable(data)[*1:5] ##0 dAck;
-        endproperty
+         @(posedge clk) $rose(dValid) |-> (!$isunknown(data) and $stable(data)) until_with dAck;
+	endproperty
         assert property (checkdataValid) else $display($stime,,,"checkdataValid FAIL");
 `endif
 
@@ -42,7 +41,7 @@ module bus_protocol_property (input bit clk, dValid, dAck, reset,
           --------------------------------------------------*/
 `ifdef check3
 	property checkdAck;
-	  @(posedge clk) $rose(dValid) |-> dValid[*2:4]  dAck ##1 !dValid; // TODO: it seems like the solution also asserts check1 here, even if that is not specified in the requirement
+	 @(posedge clk) $rose(dValid) |=> dValid[*1:4] ##0 dAck ##1 !dValid;
 	endproperty
 	assert property (checkdAck) else $display($stime,,,"checkdAck FAIL");
 `endif                                                                                       

@@ -1,5 +1,5 @@
 # vsim -assertdebug -coverage -c test_bus_protocol -l test_bus_protocol_check2.log -do "run -all;quit" 
-# Start time: 14:36:47 on Jan 26,2017
+# Start time: 14:35:35 on Jan 31,2017
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim-64
 # //  Version 10.5c linux_x86_64 Jul 20 2016
@@ -55,7 +55,6 @@
 #        220  clk=1 dValid=1 data=00 dAck=0
 #        230  clk=1 dValid=1 data=00 dAck=0
 #        240  clk=1 dValid=1 data=00 dAck=0
-#        240  checkdataValid FAIL
 #        250  clk=1 dValid=1 data=00 dAck=1
 # 
 # 
@@ -79,10 +78,10 @@
 # 
 # SCENARIO 7
 #        380  clk=1 dValid=0 data=00 dAck=0
-#        380  checkdataValid FAIL
 #        390  clk=1 dValid=1 data=00 dAck=0
 #        400  clk=1 dValid=1 data=00 dAck=0
 #        410  clk=1 dValid=1 data=xx dAck=1
+#        410  checkdataValid FAIL
 #        410  checkdataValid FAIL
 #        420  clk=1 dValid=0 data=00 dAck=0
 #        430  clk=1 dValid=1 data=00 dAck=0
@@ -95,8 +94,8 @@
 # 
 #        480  clk=1 dValid=0 data=00 dAck=0
 # ** Note: Data structure takes 5388416 bytes of memory
-#          Process time 0.01 seconds
+#          Process time 0.02 seconds
 #          $finish    : bus_protocol.v(134)
 #    Time: 485 ns  Iteration: 1  Instance: /test_bus_protocol/bp1
-# End time: 14:37:31 on Jan 26,2017, Elapsed time: 0:00:44
+# End time: 14:36:18 on Jan 31,2017, Elapsed time: 0:00:43
 # Errors: 0, Warnings: 0
