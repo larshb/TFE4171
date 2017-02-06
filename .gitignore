@@ -2,3 +2,9 @@ work/
 *.swp
 *.swo
 *~
+
+*.aux
+*.log
+*.toc
+*.out
+*.pdf

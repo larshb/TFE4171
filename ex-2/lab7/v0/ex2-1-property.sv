@@ -23,10 +23,8 @@ module ex2_1_property
  *------------------------------------ */
 
 `ifdef check1
-/* -----\/----- EXCLUDED -----\/-----
-
 property reset_asserted;
-   @(posedge clk) data_in |=> data_out; //DUMMY - REMOVE  this line and code correct assertion
+   @(posedge clk) rst |-> !data_out;
 endproperty
 
 reset_check: assert property(reset_asserted)
@@ -34,7 +32,6 @@ reset_check: assert property(reset_asserted)
 	   rst, data_out);
 else $display($stime,,,"\t\RESET CHECK FAIL:: rst_=%b data_out=%0d \n",
 	      rst, data_out);
- -----/\----- EXCLUDED -----/\-----  */
 `endif
 
 /* ------------------------------------
@@ -46,6 +43,11 @@ else $display($stime,,,"\t\RESET CHECK FAIL:: rst_=%b data_out=%0d \n",
  * ------------------------------------ */
 
 `ifdef check2
+property valido_asserted;
+    @(posedge clk) validi[*3] |=> valido;
+endproperty
+
+valido_check: assert property(valido_asserted) else $display($stime,,,"\t\VALIDO CHECK FAIL");
 `endif
 
 /* ------------------------------------
@@ -57,6 +59,16 @@ else $display($stime,,,"\t\RESET CHECK FAIL:: rst_=%b data_out=%0d \n",
  * ------------------------------------ */
 
 `ifdef check3
+sequence viSec;
+	@(posedge clk) validi[*3] ##1 1'b1;
+endsequence
+
+property valido_asserted2;
+    @(posedge clk) valido |-> viSec.ended;
+endproperty
+
+valido_check2: assert property(valido_asserted2) $display($stime,,,"\t\VALIDO CHECK2 PASS");
+else $display($stime,,,"\t\VALIDO CHECK2 FAIL");
 `endif
 
 /* ------------------------------------
@@ -68,6 +80,13 @@ else $display($stime,,,"\t\RESET CHECK FAIL:: rst_=%b data_out=%0d \n",
  * ------------------------------------ */
 
 `ifdef check4
+property correct_data_out;
+    @(posedge clk) valido |-> data_out == ($past(data_in,3) * $past(data_in,2) + $past(data_in,1));
+endproperty
+
+valid_value: assert property(correct_data_out) $display($stime,,,"\t\DATA OUT VALUE CHECK PASS");
+else $display($stime,,,"\t\DATA OUT VALUE CHECK FAIL");
+
 `endif
 
 endmodule
