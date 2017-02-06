@@ -1,5 +1,5 @@
 # vsim -assertdebug -coverage -c test_counter -l test_counter_nobugs.log -do " run -all; quit" 
-# Start time: 12:27:53 on Jan 26,2017
+# Start time: 17:12:46 on Jan 31,2017
 # ** Note: (vsim-3812) Design is being optimized...
 # //  Questa Sim-64
 # //  Version 10.5c linux_x86_64 Jul 20 2016
@@ -53,8 +53,8 @@
 #        315  rst_=1 clk=1 count_enb=0 ld_cnt_=1 updn_cnt=0 DIN=100 DOUT=90
 #        325  rst_=1 clk=1 count_enb=0 ld_cnt_=1 updn_cnt=0 DIN=100 DOUT=90
 # ** Note: Data structure takes 5126272 bytes of memory
-#          Process time 0.01 seconds
+#          Process time 0.02 seconds
 #          $finish    : test_counter.sv(29)
 #    Time: 325 ns  Iteration: 1  Instance: /test_counter
-# End time: 12:28:26 on Jan 26,2017, Elapsed time: 0:00:33
+# End time: 17:13:20 on Jan 31,2017, Elapsed time: 0:00:34
 # Errors: 0, Warnings: 1

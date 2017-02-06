@@ -10,20 +10,16 @@
  */
 
 module ex2_1 (
-	      input 		 clk, rst, validi,
-	      input [31:0] 	 data_in,
-	      output logic 	 valido, 
+	      input 		  clk, rst, validi,
+	      input [31:0] 	  data_in,
+	      output logic 	  valido, 
 	      output logic [31:0] data_out
 	      );
    
-   enum 			 {S0, S1, S2} state, next;
+   enum 			  {S0, S1, S2} state = S0, next = S0;
    
-   logic [31:0] 			 a;
+   logic [31:0] 		  a;
 
-   initial begin
-      state = S0;
-   end
-   
    always_ff @(posedge clk or posedge rst) begin
       if (rst) begin
 	 data_out <= 32'b0;
