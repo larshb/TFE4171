@@ -51,7 +51,7 @@ module test_ex2_1;
       @(negedge clk); validi=1'b1; data_in+=32'b1;
       @(negedge clk); validi=1'b0; data_in+=32'b1;
       
-/************ Uncomment for task 5 ******************
+/************ Uncomment for task 5 *******************/
       @(negedge clk); validi=1'b1; data_in+=32'b1;
       @(negedge clk); validi=1'b1; data_in+=32'b1;
       @(negedge clk); validi=1'b1; data_in+=32'b1;
@@ -71,7 +71,7 @@ module test_ex2_1;
       @(negedge clk); validi=1'b1; data_in+=32'b1;
       @(negedge clk); validi=1'b1; data_in+=32'b1;
       @(negedge clk); validi=1'b0; data_in+=32'b1;
-************ Uncomment for task 5 ******************/
+/************ Uncomment for task 5 ******************/
  
       @(negedge clk);
    endtask

@@ -44,7 +44,7 @@ else $display($stime,,,"\t\RESET CHECK FAIL:: rst_=%b data_out=%0d \n",
 
 `ifdef check2
 property valido_asserted;
-    @(posedge clk) validi[*3] |=> valido;
+    @(posedge clk) disable iff (rst) validi[*3] |=> valido;
 endproperty
 
 valido_check: assert property(valido_asserted) else $display($stime,,,"\t\VALIDO CHECK FAIL");
@@ -67,7 +67,7 @@ property valido_asserted2;
     @(posedge clk) valido |-> viSec.ended;
 endproperty
 
-valido_check2: assert property(valido_asserted2) $display($stime,,,"\t\VALIDO CHECK2 PASS");
+valido_check2: assert property(valido_asserted2) //$display($stime,,,"\t\VALIDO CHECK2 PASS");
 else $display($stime,,,"\t\VALIDO CHECK2 FAIL");
 `endif
 
@@ -84,7 +84,7 @@ property correct_data_out;
     @(posedge clk) valido |-> data_out == ($past(data_in,3) * $past(data_in,2) + $past(data_in,1));
 endproperty
 
-valid_value: assert property(correct_data_out) $display($stime,,,"\t\DATA OUT VALUE CHECK PASS");
+valid_value: assert property(correct_data_out) //$display($stime,,,"\t\DATA OUT VALUE CHECK PASS");
 else $display($stime,,,"\t\DATA OUT VALUE CHECK FAIL");
 
 `endif

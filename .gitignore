@@ -4,7 +4,6 @@ work/
 *~
 
 *.aux
-*.log
 *.toc
 *.out
 *.pdf
