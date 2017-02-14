@@ -1,7 +1,6 @@
 # vsim -assertdebug -coverage -c test_ex2_1 -l test-ex2-1-check5.log -do " run -all; quit" 
-# Start time: 19:45:11 on Feb 14,2017
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vopt-143) Recognized 1 FSM in module "ex2_1(fast)".
+# Start time: 20:03:07 on Feb 14,2017
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # //  Questa Sim-64
 # //  Version 10.5c linux_x86_64 Jul 20 2016
 # //
@@ -73,8 +72,8 @@
 #        325  	DATA OUT VALUE CHECK FAIL
 #        335  rst=0 clk=1 validi=0 DIN=31 valido=0 DOUT=785
 # ** Note: Data structure takes 6772872 bytes of memory
-#          Process time 0.00 seconds
+#          Process time 0.02 seconds
 #          $finish    : test-ex2-1.sv(28)
 #    Time: 335 ns  Iteration: 1  Instance: /test_ex2_1
-# End time: 19:46:04 on Feb 14,2017, Elapsed time: 0:00:53
+# End time: 20:03:58 on Feb 14,2017, Elapsed time: 0:00:51
 # Errors: 0, Warnings: 0

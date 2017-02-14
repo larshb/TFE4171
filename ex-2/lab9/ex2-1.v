@@ -18,14 +18,15 @@ module ex2_1 (
    
    enum 			  {S0, S1, S2} state = S0, next = S0;
    
-   logic [31:0] 		  a, b, multi_r, adder_r, data_in_buf;
+   logic [31:0] 		  a, b, multi_r, adder_r, data_in_buf, alu_in_a, alu_in_b, alu_r;
+   logic [2:0]			  op;
    logic clk_;
 
    always @(edge clk) begin
    	clk_ <= !clk;
    end
 
-	alu fake_multiplier
+/*	alu fake_multiplier
 		(
 		clk_,
 		a, b,
@@ -40,7 +41,32 @@ module ex2_1 (
 		3'b000, // Op - add
 		adder_r
 		);
- 
+ */
+	alu balu
+		{
+			clk,
+			alu_in_a,
+			alu_in_b,
+			op,
+			alu_r
+		};
+
+   always_comb begin
+	if (clk) begin
+		alu_in_a <= a;
+		alu_in_b <= b;
+		op <= 3'b111;
+		multi_r <= alu_r;
+	end
+	else begin
+		alu_in_a <= multi_r;
+		alu_in_b <= data_in;
+		op <= 3'b000;
+		adder_r <= alu_r;
+	end
+
+   end
+
    always_comb data_out <= adder_r & {32{valido}};
 
    always_ff @(posedge clk or posedge rst) begin
