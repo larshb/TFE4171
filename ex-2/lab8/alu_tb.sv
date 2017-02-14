@@ -12,8 +12,20 @@ module alu_tb();
 parameter NUMBERS = 10000;
 
 //make your vector here
+alu_data test_data[NUMBERS];
 
 //Make your loop here
+initial begin: data_gen
+	int i;
+	#20;
+	//test_data = new[NUMBERS];
+	for (i = 0; i < NUMBERS; i = i+1) begin
+		test_data[i] = new();
+		test_data[i].randomize();
+		test_data[i].get(a, b, op);
+		#20;
+	end;
+end;
 
 //Displaying signals on the screen
 always @(posedge clk) 
@@ -26,13 +38,25 @@ always #10 clk=~clk;
 alu dut (clk,a,b,op,r);
 
 //Make your opcode enumeration here
-
+enum { ADD, SUB, NOT, NAND, NOR, AND, OR, XOR } opcode;
 
 //Make your covergroup here
-
+covergroup alu_cg @(posedge clk);
+	op_cp : coverpoint op;// {
+//		bins valid = {[0:6]};
+//		bins invalid = {7};
+//	}
+	a_cp : coverpoint a {
+		bins zero = {0};
+		bins smalll = {[1:50]};
+		bins hunds[3] = {[100:200]};
+		bins llarge = {[200:$]};
+	}
+	a_b_cp : cross a, b;
+endgroup
 
 //Initialize your covergroup here
-
+alu_cg alu_inst = new();
 
 //Sample covergroup here
 
