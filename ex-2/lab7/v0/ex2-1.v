@@ -18,7 +18,7 @@ module ex2_1 (
    
    enum 			  {S0, S1, S2} state = S0, next = S0;
    
-   logic [31:0] 		  a, b,;
+   logic [31:0] 		  a, b;
 
    always_ff @(posedge clk or posedge rst) begin
       if (rst) begin

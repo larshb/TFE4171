@@ -1,6 +1,7 @@
 # vsim -assertdebug -coverage -c test_ex2_1 -l test-ex2-1-check5.log -do " run -all; quit" 
-# Start time: 20:03:07 on Feb 14,2017
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Start time: 16:05:46 on Feb 17,2017
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Note: (vopt-143) Recognized 1 FSM in module "ex2_1(fast)".
 # //  Questa Sim-64
 # //  Version 10.5c linux_x86_64 Jul 20 2016
 # //
@@ -40,40 +41,30 @@
 #        105  rst=0 clk=1 validi=1 DIN=9 valido=0 DOUT=0
 #        115  rst=0 clk=1 validi=1 DIN=10 valido=0 DOUT=0
 #        125  rst=0 clk=1 validi=1 DIN=11 valido=0 DOUT=0
-#        135  rst=0 clk=1 validi=0 DIN=12 valido=1 DOUT=64
-#        135  	DATA OUT VALUE CHECK FAIL
-#        145  rst=0 clk=1 validi=1 DIN=13 valido=0 DOUT=64
-#        155  rst=0 clk=1 validi=1 DIN=14 valido=0 DOUT=64
-#        165  rst=0 clk=1 validi=1 DIN=15 valido=0 DOUT=64
-#        175  rst=0 clk=1 validi=1 DIN=16 valido=1 DOUT=157
-#        175  	DATA OUT VALUE CHECK FAIL
-#        185  rst=0 clk=1 validi=1 DIN=17 valido=1 DOUT=197
-#        185  	DATA OUT VALUE CHECK FAIL
-#        195  rst=0 clk=1 validi=0 DIN=18 valido=1 DOUT=226
-#        195  	DATA OUT VALUE CHECK FAIL
-#        205  rst=0 clk=1 validi=1 DIN=19 valido=0 DOUT=226
-#        215  rst=0 clk=1 validi=1 DIN=20 valido=0 DOUT=226
-#        225  rst=0 clk=1 validi=1 DIN=21 valido=0 DOUT=226
-#        235  rst=0 clk=1 validi=1 DIN=22 valido=1 DOUT=343
-#        235  	DATA OUT VALUE CHECK FAIL
-#        245  rst=0 clk=1 validi=0 DIN=23 valido=1 DOUT=401
-#        245  	DATA OUT VALUE CHECK FAIL
-#        255  rst=0 clk=1 validi=0 DIN=24 valido=0 DOUT=401
-#        265  rst=0 clk=1 validi=1 DIN=25 valido=0 DOUT=401
-#        275  rst=0 clk=1 validi=1 DIN=26 valido=0 DOUT=401
-#        285  rst=0 clk=1 validi=1 DIN=27 valido=0 DOUT=401
-#        295  rst=0 clk=1 validi=1 DIN=28 valido=1 DOUT=576
-#        295  	DATA OUT VALUE CHECK FAIL
-#        305  rst=0 clk=1 validi=1 DIN=29 valido=1 DOUT=677
-#        305  	DATA OUT VALUE CHECK FAIL
-#        315  rst=0 clk=1 validi=1 DIN=30 valido=1 DOUT=730
-#        315  	DATA OUT VALUE CHECK FAIL
-#        325  rst=0 clk=1 validi=0 DIN=31 valido=1 DOUT=785
-#        325  	DATA OUT VALUE CHECK FAIL
-#        335  rst=0 clk=1 validi=0 DIN=31 valido=0 DOUT=785
+#        135  rst=0 clk=1 validi=0 DIN=12 valido=1 DOUT=101
+#        145  rst=0 clk=1 validi=1 DIN=13 valido=0 DOUT=0
+#        155  rst=0 clk=1 validi=1 DIN=14 valido=0 DOUT=0
+#        165  rst=0 clk=1 validi=1 DIN=15 valido=0 DOUT=0
+#        175  rst=0 clk=1 validi=1 DIN=16 valido=1 DOUT=197
+#        185  rst=0 clk=1 validi=1 DIN=17 valido=1 DOUT=226
+#        195  rst=0 clk=1 validi=0 DIN=18 valido=1 DOUT=257
+#        205  rst=0 clk=1 validi=1 DIN=19 valido=0 DOUT=0
+#        215  rst=0 clk=1 validi=1 DIN=20 valido=0 DOUT=0
+#        225  rst=0 clk=1 validi=1 DIN=21 valido=0 DOUT=0
+#        235  rst=0 clk=1 validi=1 DIN=22 valido=1 DOUT=401
+#        245  rst=0 clk=1 validi=0 DIN=23 valido=1 DOUT=442
+#        255  rst=0 clk=1 validi=0 DIN=24 valido=0 DOUT=0
+#        265  rst=0 clk=1 validi=1 DIN=25 valido=0 DOUT=0
+#        275  rst=0 clk=1 validi=1 DIN=26 valido=0 DOUT=0
+#        285  rst=0 clk=1 validi=1 DIN=27 valido=0 DOUT=0
+#        295  rst=0 clk=1 validi=1 DIN=28 valido=1 DOUT=677
+#        305  rst=0 clk=1 validi=1 DIN=29 valido=1 DOUT=730
+#        315  rst=0 clk=1 validi=1 DIN=30 valido=1 DOUT=785
+#        325  rst=0 clk=1 validi=0 DIN=31 valido=1 DOUT=842
+#        335  rst=0 clk=1 validi=0 DIN=31 valido=0 DOUT=0
 # ** Note: Data structure takes 6772872 bytes of memory
-#          Process time 0.02 seconds
+#          Process time 0.03 seconds
 #          $finish    : test-ex2-1.sv(28)
 #    Time: 335 ns  Iteration: 1  Instance: /test_ex2_1
-# End time: 20:03:58 on Feb 14,2017, Elapsed time: 0:00:51
+# End time: 16:06:40 on Feb 17,2017, Elapsed time: 0:00:54
 # Errors: 0, Warnings: 0
