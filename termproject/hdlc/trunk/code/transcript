@@ -1,0 +1,63 @@
+# vsim -novopt -coverage -c hdlc_tb sva_wrapper 
+# Start time: 16:09:51 on Oct 23,2015
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# //  Questa Sim
+# //  Version 10.3c_2 linux Sep 24 2014
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading hdlc.hdlc_components_pkg
+# Loading work.hdlc_tb(hdlc_beh_tb)
+# Loading sv_std.std
+# Loading work.sva_wrapper
+# Loading work.hdlc_ent(hdlc_str)
+# Loading work.wb_if_ent(wb_if_rtl)
+# Loading work.txsynch_ent(txsynch_rtl)
+# Loading utility.tools_pkg(body)
+# Loading memlib.mem_pkg
+# Loading work.txbuff_ent(txbuff_beh)
+# Loading memlib.spmem_ent(spmem_beh)
+# Loading hdlc.pck_crc16_d8(body)
+# Loading work.txfcs_ent(txfcs_beh)
+# Loading work.txchannel_ent(txchannel_str)
+# Loading work.flag_ins_ent(flag_ins_beh)
+# Loading work.zeroins_ent(zero_ins_beh)
+# Loading work.txcont_ent(txcont_beh)
+# Loading work.rxchannel_ent(rxchannel_beh)
+# Loading work.rxcont_ent(rxcont_beh)
+# Loading work.zerodetect_ent(zerodetect_beh)
+# Loading work.flagdetect_ent(flagdetect_beh)
+# Loading work.rxsynch_ent(rxsynch_rtl)
+# Loading work.rxbuff_ent(rxbuff_rtl)
+# Loading work.rxfcs_ent(rxfcs_rtl)
+# Loading /eda/tools/mentor/questasim.10.3c_2/questasim/linux/../verilog.vl_resolve(body)
+# Loading work.hdlc_props
+# ** Warning: (vsim-8634) Code was not compiled with coverage options.
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /hdlc_tb/DUT/TxBuff
+#       8750  	RX flag, frame start
+# 
+#     140750  	RX flag, frame start
+# 
+#     166250  	TX flag, frame start
+# 
+#     166250  	RX flag, frame start
+# 
+#     311750  	TX flag, frame start
+# 
+#     311750  	RX flag, frame start
+# 
+# ** Warning: Data byte 1 missmatch
+#    Time: 318610 ns  Iteration: 1  Instance: /hdlc_tb
+# End time: 16:10:26 on Oct 23,2015, Elapsed time: 0:00:35
+# Errors: 0, Warnings: 4

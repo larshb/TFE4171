@@ -1,0 +1,72 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ksvar/dds2/termproject/hdlc/trunk/code
+Phdlc_components_pkg
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+w1423432043
+R0
+8../code/libs/hdlc_components_pkg.vhd
+F../code/libs/hdlc_components_pkg.vhd
+l0
+L83
+V73`U1P40QAacc?<1GQlh^0
+!s100 kc=?d=lARoI_Mhg;1fSd[0
+Z3 OE;C;10.3c_2;59
+32
+Z4 !s110 1452177944
+!i10b 1
+!s108 1452177944.704573
+!s90 -work|hdlc|../code/libs/hdlc_components_pkg.vhd|
+!s107 ../code/libs/hdlc_components_pkg.vhd|
+!i113 0
+Z5 o-work hdlc
+Z6 tExplicit 1
+Ppck_crc16_d8
+R1
+R2
+Z7 w1423401696
+R0
+Z8 8../code/libs/PCK_CRC16_D8.vhd
+Z9 F../code/libs/PCK_CRC16_D8.vhd
+l0
+L27
+VVVF8U3X@CW_nXS64djUDB3
+!s100 @lV4z=]DhWI076Z7I6PaW2
+R3
+32
+b1
+R4
+!i10b 1
+Z10 !s108 1452177944.209074
+Z11 !s90 -work|hdlc|../code/libs/PCK_CRC16_D8.vhd|
+Z12 !s107 ../code/libs/PCK_CRC16_D8.vhd|
+!i113 0
+R5
+R6
+Bbody
+DPx4 work 12 pck_crc16_d8 0 22 VVF8U3X@CW_nXS64djUDB3
+R1
+R2
+l0
+L42
+VjoSgAhEn?8T;0?3a]Geol3
+!s100 bCejW4ITAO7GfocUT[k5>0
+R3
+32
+R4
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R5
+R6
+nbody
