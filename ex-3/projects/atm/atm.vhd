@@ -20,5 +20,5 @@ begin
   state_s <= error_i;
  end process;
  correct_o <= not state_s and error_i and not multiple_i;
- dismiss_o <= error_i and multiple_i;
+ dismiss_o <= (state_s and error_i) or (error_i and multiple_i);
 end rtl;

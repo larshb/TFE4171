@@ -1,0 +1,49 @@
+// @lang=sva @ts=2
+
+module atm_property_suite(clk, error_i, multiple_i, correct_o, dismiss_o);
+
+input logic clk;
+input logic error_i, multiple_i;
+input logic correct_o, dismiss_o;
+
+// sequence definitions
+
+
+// property definitions
+property multiple_i_and_error_i;
+    @(posedge clk) multiple_i |-> error_i;
+endproperty
+
+property correct_and_dismiss;
+    @(posedge clk) !(correct_o && dismiss_o);
+endproperty
+
+property correct_errorfree;
+    @(posedge clk) !error_i |-> !(correct_o || dismiss_o);
+endproperty
+
+property multibit_dismiss;
+    @(posedge clk) multiple_i |-> dismiss_o;
+endproperty
+
+property first_singlebit_only_correct;
+    @(posedge clk) $rose(error_i) && !multiple_i implies correct_o;
+endproperty
+
+property second_error_dismiss;
+    @(posedge clk) $stable(error_i) && error_i implies dismiss_o;
+endproperty
+
+// make assertion on properties to be checked
+a_multiple_i_and_error_i	: assume property (multiple_i_and_error_i);
+a_correct_and_dismiss 	        : assert property (correct_and_dismiss);
+a_correct_errorfree 	        : assert property (correct_errorfree);
+a_multibit_dismiss 	        : assert property (multibit_dismiss);
+a_first_singlebit_only_correct  : assert property (first_singlebit_only_correct);
+a_second_error_dismiss          : assert property (second_error_dismiss);
+
+endmodule
+
+// bind the verification IP to the design
+
+bind atm atm_property_suite(.*);
