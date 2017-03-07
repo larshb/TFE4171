@@ -6,3 +6,5 @@ work/
 *.aux
 *.toc
 *.out
+
+*.onespin/

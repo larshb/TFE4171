@@ -13,11 +13,58 @@ parameter IDLE = 1'b0;
 parameter BUSY = 1'b1;
 
 // sequence definition
+sequence comp_req;
+  free_i && request_i == 2'b11;
+endsequence
+
+sequence m0_then_m1;
+	grant_o == 2'b01 ##1 (grant_o == 2'b00)[*1:$] ##1 grant_o == 2'b10;
+endsequence
+
+sequence m1_then_m0;
+	grant_o == 2'b10 ##1 (grant_o == 2'b00)[*1:$] ##1 grant_o == 2'b01;
+endsequence
 
 // property definition
+property assume_grant_free_;
+		grant_o != 2'b00 implies !free_i;
+endproperty
+
+property reset_check;
+    reset implies state_s == IDLE && grant_o == 2'b00;
+endproperty
+
+property competing_req_after_reset;
+    disable iff (reset) $fell(reset) ##0 request_i == 2'b11 && free_i implies ##1 grant_o == 2'b01;
+endproperty
+
+property no_req_no_gnt;
+    request_i == 2'b00 implies ##1 grant_o == 2'b00;
+endproperty
+
+property single_req;
+    disable iff (reset) state_s == IDLE && (request_i == 2'b01 || request_i ==2'b10) && free_i implies ##1 grant_o == $past(request_i) ##1 state_s == IDLE;
+endproperty
+
+property competing_req;
+		// TODO: extend to check that the grants alternate between the two masters
+		disable iff (reset) comp_req implies ##1 (grant_o[0] ^ grant_o[1]);
+endproperty
+
+property cons_comp_req; // (request_i == 0)[*1:$]
+		disable iff (reset) comp_req ##1 !free_i[*0:$] ##1 comp_req implies ##1 (m0_then_m1 or m1_then_m0);
+endproperty
 
 // assert, assume statement
+assume property (@(posedge clk) assume_grant_free_);
+a_reset_check : assert property (@(posedge clk) reset_check);
+a_competing_req_after_reset: assert property (@(posedge clk) competing_req_after_reset);
+a_no_req_no_gnt : assert property (@(posedge clk) no_req_no_gnt);
+a_single_req : assert property (@(posedge clk) single_req);
+a_competing_req : assert property (@(posedge clk) competing_req);
+a_cons_comp_req : assert property (@(posedge clk) cons_comp_req);
 
 endmodule
 
 // bind statement
+bind arbiter arbiter_property_suite(.*);
