@@ -1,0 +1,39 @@
+// @lang=sva @ts=2
+
+module jkff_property_suite(clk, j_i, k_i, q_o);
+
+input logic clk;
+input logic j_i,k_i;
+input logic q_o;
+
+// sequence definitions
+
+
+// property definitions
+property set;
+	@(posedge clk) j_i && !k_i |=> q_o;
+endproperty
+
+property unset;
+	@(posedge clk) !j_i && k_i |=> !q_o;
+endproperty
+
+property toggle;
+	@(posedge clk) j_i && k_i |=> q_o == $past(!q_o);
+endproperty
+
+property idle;
+	@(posedge clk) !j_i && !k_i |=> q_o == $past(q_o);
+endproperty
+
+// make assertion on properties to be checked
+a_set 	 : assert property (set);
+a_unset  : assert property (unset);
+a_toggle : assert property (toggle);
+a_idle   : assert property (idle);
+
+endmodule
+
+// bind the verification IP to the design
+
+bind jkff jkff_property_suite(.*);

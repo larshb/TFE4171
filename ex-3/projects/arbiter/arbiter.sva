@@ -1,0 +1,23 @@
+// @lang=sva @ts=2
+
+module arbiter_property_suite(clk,reset,request_i,grant_o,free_i,state_s);
+
+input logic clk;
+input logic reset;
+input logic [1:0] request_i;
+input logic [1:0] grant_o;
+input logic free_i;
+input logic state_s;
+
+parameter IDLE = 1'b0;
+parameter BUSY = 1'b1;
+
+// sequence definition
+
+// property definition
+
+// assert, assume statement
+
+endmodule
+
+// bind statement
