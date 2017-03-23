@@ -35,6 +35,12 @@ parameter c_BRANCH  = 4'b0111;
 parameter c_ADD     = 3'b001;
 parameter c_OR      = 3'b010;
 
+
+property reg0_unused;
+  REG_FILE[0] == 0;
+endproperty
+assume_reg0_unuzed: assume property(@(posedge clk) reg0_unused);
+
 // sequence definition for SVA property
 
 `define true 1
@@ -44,13 +50,182 @@ parameter c_OR      = 3'b010;
 `begin_tda(ops)
 
 // sequence definition for TiDAL property
+sequence ex_to_wb;
+  t##1 CONTROL_STATE == c_EX and
+  t##2 CONTROL_STATE == c_MEM and
+  t##3 CONTROL_STATE == c_WB;
+endsequence
 
 // your operational properties
+// OR_IMM
+property or_imm;
+logic [2:0] rs1_addr, rd_addr;
+logic [5:0] imm;
+logic [7:0] rs1_content;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rd_addr, IR[8:6]) and
+  t##0 set_freeze(imm, IR[5:0]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_OR_IMM
+implies
+  ex_to_wb and
+  t##4 (rd_addr == 0) ? 1 :
+    REG_FILE[rd_addr] == (rs1_content | { { 2 { imm[5] } }, imm}); 
+endproperty
+
+// OR_REG
+property or_reg;
+logic [2:0] rs1_addr, rs2_addr, rd_addr;
+logic [7:0] rs1_content, rs2_content;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rs2_addr, IR[8:6]) and
+  t##0 set_freeze(rd_addr, IR[5:3]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 set_freeze(rs2_content, REG_FILE[rs2_addr]) and
+  t##0 IR[2:0] == c_OR and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_ALU_REG
+implies
+  ex_to_wb and
+  t##4 (rd_addr == 0) ? 1 :
+    REG_FILE[rd_addr] == (rs1_content | rs2_content); 
+endproperty
+
+// ADD_IMM
+property add_imm;
+logic [2:0] rs1_addr, rd_addr;
+logic [5:0] imm;
+logic [7:0] rs1_content;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rd_addr, IR[8:6]) and
+  t##0 set_freeze(imm, IR[5:0]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_ADD_IMM
+implies
+  ex_to_wb and
+  t##4 (rd_addr == 0)
+			? 1
+			: REG_FILE[rd_addr] == (rs1_content + { { 2 { imm[5] } }, imm}); 
+endproperty
+
+// ADD_REG
+property add_reg;
+logic [2:0] rs1_addr, rs2_addr, rd_addr;
+logic [7:0] rs1_content, rs2_content;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rs2_addr, IR[8:6]) and
+  t##0 set_freeze(rd_addr, IR[5:3]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 set_freeze(rs2_content, REG_FILE[rs2_addr]) and
+  t##0 IR[2:0] == c_ADD and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_ALU_REG
+implies
+  ex_to_wb and
+  t##4 (rd_addr == 0) ? 1 :
+    REG_FILE[rd_addr] == (rs1_content + rs2_content); 
+endproperty
+
+property load;
+logic [2:0] rs1_addr, rd_addr;
+logic [5:0] imm;
+logic [7:0] rs1_content, data_from_mem;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rd_addr, IR[8:6]) and
+  t##0 set_freeze(imm, IR[5:0]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_LOAD and
+  t##2 set_freeze(data_from_mem, dataIn)
+implies
+  ex_to_wb and
+  t##2 dataAddr == (rs1_content + { { 2 { imm[5] } }, imm}) and
+  t##4 (rd_addr == 0)
+			? 1
+			: REG_FILE[rd_addr] == data_from_mem; 
+endproperty
+
+property store;
+logic [2:0] rs1_addr, rs2_addr;
+logic [5:0] imm;
+logic [7:0] rs1_content, rs2_content;
+  t##0 set_freeze(rs1_addr, IR[11:9]) and
+  t##0 set_freeze(rs2_addr, IR[8:6]) and
+  t##0 set_freeze(imm, IR[5:0]) and
+  t##0 set_freeze(rs1_content, REG_FILE[rs1_addr]) and
+  t##0 set_freeze(rs2_content, REG_FILE[rs2_addr]) and
+  t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_STORE
+implies
+  ex_to_wb and
+  t##2 dataAddr == (rs1_content + { { 2 { imm[5] } }, imm}) and
+  t##2 dataOut == rs2_content and
+  t##2 writeEnable;
+endproperty
+
+property load_and_store_addr;
+logic [7:0] data_addr;
+  t##0 CONTROL_STATE == c_ID and
+  (
+		t##0 IR[15:12] == c_STORE or
+		t##0 IR[15:12] == c_LOAD
+	) and
+  t##0 set_freeze(data_addr, REG_FILE[IR[11:9]] + { { 2 { IR[5] } }, IR[5:0] } )
+implies
+  t##2 dataAddr == data_addr;
+endproperty
+
+property instr_addr_pointer;
+	t##1 !$stable(instrAddr)
+implies
+	t##0 CONTROL_STATE == c_ID and
+	(t##0 IR[15:12] == c_BRANCH or
+	t##0 IR[15:12] == c_JUMP) or
+	t##0 CONTROL_STATE == c_IF;
+endproperty
+
+property jump;
+logic [15:0] PC_next;
+	t##0 IR[15:12] == c_JUMP and
+	t##0 CONTROL_STATE == c_ID and
+	t##0 set_freeze(PC_next, instrAddr + 16'd2 + { { 4 { IR[11] } }, IR[11:0] } )
+implies
+	t##2 instrAddr == PC_next;
+endproperty
+
+property branch;
+logic [15:0] PC;
+logic [31:0] PC_next;
+logic [7:0] rs1_content;
+logic [15:0] offset;
+	t##0 set_freeze(PC, instrAddr) and
+	t##0 set_freeze(rs1_content, REG_FILE[IR[11:9]]) and
+	t##0 set_freeze(offset, {{7{IR[8]}},IR[8:0]}) and
+	t##0 CONTROL_STATE == c_ID and
+  t##0 IR[15:12] == c_BRANCH and
+  t##0 set_freeze(PC_next, PC + 16'd2 + (rs1_content == 0 ? offset : 0)) 
+implies
+  t##2 instrAddr == PC_next[15:0];
+endproperty
+
 
 // assert your properties
+assert_or_imm: assert property(@(posedge clk) disable iff(reset) or_imm);
+assert_or_reg: assert property(@(posedge clk) disable iff(reset) or_reg);
+assert_add_imm: assert property(@(posedge clk) disable iff(reset) add_imm);
+assert_add_reg: assert property(@(posedge clk) disable iff(reset) add_reg);
+assert_load: assert property(@(posedge clk) disable iff(reset) load);
+assert_store: assert property(@(posedge clk) disable iff(reset) store);
+assert_load_and_store_addr: assert property(@(posedge clk) disable iff(reset) load_and_store_addr);
+assert_instr_addr_pointer: assert property(@(posedge clk) disable iff(reset) instr_addr_pointer);
+assert_jump: assert property(@(posedge clk) disable iff(reset) jump);
+assert_branch: assert property(@(posedge clk) disable iff(reset) branch);
 
 `end_tda
 
 endmodule
 
 // your bind statement
+bind proc proc_property_suite proc_property_bind(.*);
