@@ -8,3 +8,5 @@ work/
 *.out
 
 *.onespin/
+
+*.vim
