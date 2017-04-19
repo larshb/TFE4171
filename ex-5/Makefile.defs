@@ -1,0 +1,36 @@
+## Variable that points to SystemC installation path
+ifndef SYSTEMC
+SYSTEMC = /eda/tools/systemc-2.3.1
+endif
+
+TARGET_ARCH=linux64
+
+INCDIR = -I. -I.. -I$(SYSTEMC)/include
+LIBDIR = -L. -L.. -L$(SYSTEMC)/lib-$(TARGET_ARCH)
+
+EXTRA_LIBS = -pthread
+LIBS   =  -lsystemc -lm $(EXTRA_LIBS)
+
+EXE    = $(MODULE).x
+
+.SUFFIXES: .cc .cpp .o .x
+
+$(EXE): $(OBJS)
+	$(CC) $(CFLAGS) $(INCDIR) $(LIBDIR) -o $@ $(OBJS) $(LIBS) 2>&1 | c++filt
+
+.cpp.o:
+	$(CC) $(CFLAGS) $(INCDIR) -c $<
+
+.cc.o:
+	$(CC) $(CFLAGS) $(INCDIR) -c $<
+
+clean:
+	rm -f $(OBJS) *~ $(EXE) core
+
+ultraclean: clean
+	rm -f Makefile.deps run.log
+
+Makefile.deps:
+#	$(CC) $(CFLAGS) $(INCDIR) -M $(SRCS) >> Makefile.deps
+
+#include Makefile.deps
