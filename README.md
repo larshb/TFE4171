@@ -11,26 +11,27 @@ The aim is to close the gap and increase design verification productivity. That 
 ### SystemVerilog
 #### Procedures
 In addition to Verilog's `always`-procedure SystemVerilog enables use of three more;
-|Procedure	  	|Logic			|Sensitivity list
+
+|Procedure	  	  |Logic			       |Sensitivity list|
 |---------------|---------------|----------------
-|`always_ff`	|Sequential		|Explicit
-|`always_comb`	|Combinational	|Inferred from code
-|`always_latch`	|Latched		|Inferred from code
+|`always_ff`	   |Sequential		   |Explicit
+|`always_comb`	 |Combinational	 |Inferred from code
+|`always_latch`	|Latched		      |Inferred from code
 
 #### Connecting ports
 Ports are connected using `DUT(.*)`, which means connect all ports to variables or nets with the same name as the ports.
 
 #### Data types
-|Type		|Description
+|Type		     |Description
 |-----------|-----------
-|`reg`		|4-state (Verilog-2001)
-|`logic`	|4-valued logic
-|`bit`		|2-state bit 0 or 1
-|`integer`	|4-state, 32-bit, signed (Verilog-2001)
-|`byte`		|8-bit signed integer
-|`int`		|2-state 32-bit signed integer
+|`reg`		    |4-state (Verilog-2001)
+|`logic`	   |4-valued logic
+|`bit`		    |2-state bit 0 or 1
+|`integer`	 |4-state, 32-bit, signed (Verilog-2001)
+|`byte`		   |8-bit signed integer
+|`int`		    |2-state 32-bit signed integer
 |`shortint`	|2-state 16-bit signed integer
-|`longint`	|2-state 64-bit signed integer
+|`longint`	 |2-state 64-bit signed integer
 
 #### Testbench constructs
 
@@ -50,14 +51,14 @@ Acronyms
 |Acronym|Description              			
 |-------|----------------------------
 |ABV	|Assertion-Based Verification
-|ASIC	|Application-Specific Integrated Circuit
-|ASSP	|Application-Specific Standard Product
+|ASIC|Application-Specific Integrated Circuit
+|ASSP|Application-Specific Standard Product
 |CRV	|Constrained Random Verification
 |DPI	|Directed Programming Interface
 |DUT	|Design Under Test
-|FPGA	|Field-Programmable Gate Array
+|FPGA|Field-Programmable Gate Array
 |HDL	|Hardware Description Language
-|HDVL	|Hardware Description and Verification Language
+|HDVL|Hardware Description and Verification Language
 |ISA	|Instruction Set Architechture
 |NoC	|Network On a Chip
 |NRE	|Non-Recurring Engineering
@@ -65,7 +66,7 @@ Acronyms
 |RNG	|Random Number Generator
 |RTB	|Reconfigurable Testbench
 |RTL	|Register-Transfer Level
-|SoC    |System on Chip
+|SoC |System on Chip
 |SVA	|System Verilog Assertions
 |UVM	|Universal Verification Methodology
 |VC		|Virtual Component
