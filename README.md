@@ -57,16 +57,18 @@ Acronyms
 |DPI	|Directed Programming Interface
 |DUT	|Design Under Test
 |FPGA|Field-Programmable Gate Array
+|FV 	|Formal Verification
 |HDL	|Hardware Description Language
 |HDVL|Hardware Description and Verification Language
 |ISA	|Instruction Set Architechture
+|NBA	|Non-Blocking Architecture
 |NoC	|Network On a Chip
 |NRE	|Non-Recurring Engineering
 |PLI	|Programming Language Interface
 |RNG	|Random Number Generator
 |RTB	|Reconfigurable Testbench
 |RTL	|Register-Transfer Level
-|SoC |System on Chip
+|SoC	|System on Chip
 |SVA	|System Verilog Assertions
 |UVM	|Universal Verification Methodology
 |VC		|Virtual Component
