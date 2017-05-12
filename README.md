@@ -54,22 +54,36 @@ Acronyms
 |ASIC|Application-Specific Integrated Circuit
 |ASSP|Application-Specific Standard Product
 |CRV	|Constrained Random Verification
+|CTL	|Computational Tree Logic
+|DFG	|Data Flow Graph
 |DPI	|Directed Programming Interface
 |DUT	|Design Under Test
+|EDA	|Electronic Design Automation
+|ESL	|Electronic System Level
+|FLIT|FLow control unITs
 |FPGA|Field-Programmable Gate Array
 |FV 	|Formal Verification
 |HDL	|Hardware Description Language
 |HDVL|Hardware Description and Verification Language
+|IPC	|Interval Property Checking
 |ISA	|Instruction Set Architechture
+|ISS	|Instruction Set Simulator
+|LoC	|Lines of Code
 |NBA	|Non-Blocking Assignments
 |NoC	|Network On a Chip
 |NRE	|Non-Recurring Engineering
 |PLI	|Programming Language Interface
+|PSL	|Property Specification Language
+|PSM	|Program State Machine
 |RNG	|Random Number Generator
 |RTB	|Reconfigurable Testbench
 |RTL	|Register-Transfer Level
+|SAM	|System Architecture Model
+|SAT	|Boolean Satisfiability
+|SFSMD|Super-state Finite State Machine with Data
 |SoC	|System on Chip
 |SVA	|System Verilog Assertions
+|TLM	|Transaction Level Modelling
 |UVM	|Universal Verification Methodology
 |VC		|Virtual Component
 |VCT	|Virtual Component Transfer
