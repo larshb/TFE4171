@@ -61,7 +61,7 @@ Acronyms
 |HDL	|Hardware Description Language
 |HDVL|Hardware Description and Verification Language
 |ISA	|Instruction Set Architechture
-|NBA	|Non-Blocking Architecture
+|NBA	|Non-Blocking Assignments
 |NoC	|Network On a Chip
 |NRE	|Non-Recurring Engineering
 |PLI	|Programming Language Interface
