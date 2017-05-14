@@ -53,10 +53,13 @@ Acronyms
 |ABV	|Assertion-Based Verification
 |ASIC|Application-Specific Integrated Circuit
 |ASSP|Application-Specific Standard Product
+|BCA	|Bus Cycle-Accurate
+|CA 	|Cycle-Accurate
 |CRV	|Constrained Random Verification
 |CTL	|Computational Tree Logic
 |DFG	|Data Flow Graph
 |DPI	|Directed Programming Interface
+|DSM	|Design Sign-off Model
 |DUT	|Design Under Test
 |EDA	|Electronic Design Automation
 |ESL	|Electronic System Level
@@ -75,7 +78,9 @@ Acronyms
 |PLI	|Programming Language Interface
 |PSL	|Property Specification Language
 |PSM	|Program State Machine
+|PVT	|Programmer’s View plus Timing
 |RNG	|Random Number Generator
+|RPC	|Remote Procedure Call
 |RTB	|Reconfigurable Testbench
 |RTL	|Register-Transfer Level
 |SAM	|System Architecture Model
@@ -83,6 +88,7 @@ Acronyms
 |SFSMD|Super-state Finite State Machine with Data
 |SoC	|System on Chip
 |SVA	|System Verilog Assertions
+|TAC	|Transaction Accurate Communication
 |TLM	|Transaction Level Modelling
 |UVM	|Universal Verification Methodology
 |VC		|Virtual Component
