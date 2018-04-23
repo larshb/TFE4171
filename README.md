@@ -54,6 +54,7 @@ Acronyms
 |ASIC|Application-Specific Integrated Circuit
 |ASSP|Application-Specific Standard Product
 |BCA	|Bus Cycle-Accurate
+|BDD |Behavior-driven development
 |CA 	|Cycle-Accurate
 |CRV	|Constrained Random Verification
 |CTL	|Computational Tree Logic
